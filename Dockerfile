@@ -6,16 +6,15 @@ COPY . .
 RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/src/tasky/tasky
 
-
 FROM alpine:3.17.0 AS release
-
-ENV MONGODB_URL=mongodb://tasky:fhjDFJ675AEdd@10.2.1.9:27017
-ENV SECRET_KEY=secret123
 
 WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
+COPY . .
+COPY .env .env
 EXPOSE 8080
 ENTRYPOINT ["/app/tasky"]
+RUN /bin/sh -c echo "hello world!" >/tmp/wizexercise.txt
 
 
