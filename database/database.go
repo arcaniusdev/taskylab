@@ -1,3 +1,4 @@
+
 package database
 
 import (
@@ -35,3 +36,4 @@ func CreateMongoClient() *mongo.Client {
 func OpenCollection(client *mongo.Client, collectionName string) *mongo.Collection {
 	return client.Database("go-mongodb").Collection(collectionName)
 }
+
